@@ -2,7 +2,6 @@ package main
 
 import (
 	"log"
-
 	"github.com/gaponovalexey/todo-app"
 	"github.com/gaponovalexey/todo-app/pkg/handler"
 )
