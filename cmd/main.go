@@ -20,7 +20,7 @@ func main() {
 	handler := handler.NewHandler(services)
 
 	srv := new(todo.Server)
-	if err := srv.Run(viper.GetString("4000"), handler.InitRoutes()); err != nil {
+	if err := srv.Run(viper.GetString("3000"), handler.InitRoutes()); err != nil {
 		log.Fatalf("Error Server %s", err.Error())
 	}
 }
