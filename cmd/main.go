@@ -14,6 +14,7 @@ func main() {
 	if err := initConfig(); err != nil {
 		log.Fatalf("Error initial config: %s", err.Error())
 	}
+	// i 
 
 	repos := repository.NewRepository()
 	services := service.NewService(repos)
