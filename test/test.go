@@ -1,29 +1,37 @@
 package main
 
-import (
-	"fmt"
-	"net/http"
-	"time"
-)
+import "fmt"
 
-func main() {
-	urls := []string{
-		"http://www.google.com",
-		"https://www.google.com",
-		"https://www.google.com",
-		"https://www.google.com",
-	}
-	for _, url := range urls {
-		doHttp(url)
-	}
+type P struct {
+	name string
+	age  int
 }
 
-func doHttp(url string) {
-	t := time.Now()
-	resp, err := http.Get(url)
-	if err != nil {
-		fmt.Println("kog")
-	}
-	defer resp.Body.Close()
-	fmt.Printf("<%s> - Static[%d] - Latency %d ms \n", url, resp.StatusCode, time.Since(t).Microseconds())
+type w struct {
+	P
+}
+type r struct {
+	P
+}
+
+func (w w) use() {
+	fmt.Println("Дерево")
+}
+func (r r) use() {
+	fmt.Println("Камень")
+}
+
+type I interface {
+	use()
+}
+type BI struct {
+	I
+}
+
+//
+func main() {
+	build := BI{I: w{P{name: "ivan", age: 22}}}
+	build.use()
+	builds := BI{I: r{P{name: "petro", age: 22}}}
+	builds.use()
 }
