@@ -5,7 +5,7 @@ import (
 	"log"
 
 	"github.com/BurntSushi/toml"
-	"github.com/gaponovalexey/go-restapi/internal/app/apiserver"
+	"github.com/gaponovalexey/go-restapi/pkg/app/apiserver"
 )
 
 var (
