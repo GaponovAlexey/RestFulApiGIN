@@ -1,4 +1,4 @@
-module github.com/gaponovalexey/todo-app
+module github.com/gaponovalexey/go-restapi
 
 go 1.18
 
