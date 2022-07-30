@@ -1,11 +1,15 @@
 package main
 
 import (
+	"fmt"
 	"log"
-	"net/http"
+
+	"github.com/gaponovalexey/go-restapi/internal/app/apiserver"
 )
 
 func main() {
-	
+	s := apiserver.New()
+	if err := s.Start(); err != nil {
+		log.Fatal(err)
+	}
 }
-
