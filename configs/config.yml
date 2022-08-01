@@ -1,0 +1,3 @@
+config:
+  BindAddr: '3000'
+  LogLevel: 'debug'
