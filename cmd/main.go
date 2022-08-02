@@ -12,8 +12,8 @@ func main() {
 		log.Fatalf("Error initial config: %s", err.Error()) // инициализация
 	}
 	
-	port, level := viper.GetString("port"), viper.GetString("level")
-	config := apiserver.NewConfig(port, level)
+	port, level, db := viper.GetString("port"), viper.GetString("level"), viper.GetString("db")
+	config := apiserver.NewConfig(port, level, db)
 	
 	s := apiserver.New(config)
 
