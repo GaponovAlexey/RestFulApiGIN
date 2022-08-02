@@ -16,6 +16,7 @@ func main() {
 	config := apiserver.NewConfig(port, level)
 	
 	s := apiserver.New(config)
+
 	if err := s.Start(); err != nil {
 		log.Fatal(err)
 	}

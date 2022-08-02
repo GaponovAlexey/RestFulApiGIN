@@ -33,9 +33,10 @@ func (s *APIServer) Start() error {
 	s.logger.Info("starting api server")
 	return http.ListenAndServe(s.config.BindAddr, s.router)
 }
+
 //loger
 func (s *APIServer) configurateLoger() error {
-	
+
 	level, err := logrus.ParseLevel(s.config.LogLevel)
 	if err != nil {
 		return err
@@ -50,7 +51,7 @@ func (s *APIServer) configureRouter() {
 }
 
 func (s *APIServer) handleHello() http.HandlerFunc {
-
+	
 	return func(w http.ResponseWriter, r *http.Request) {
 		io.WriteString(w, "hello")
 	}
