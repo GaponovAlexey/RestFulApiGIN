@@ -37,18 +37,16 @@ func (s *APIServer) Start() error {
 	}
 
 	s.logger.Info("starting api server")
-	return http.ListenAndServe(s.config.BindAddr, s.router)
+	return http.ListenAndServe("3000", s.router)
 }
 
 //loger
 func (s *APIServer) configurateLoger() error {
-
-	level, err := logrus.ParseLevel(s.config.LogLevel)
+	level, err := logrus.ParseLevel("debug")
 	if err != nil {
 		return err
 	}
 	s.logger.SetLevel(level)
-
 	return nil
 }
 
@@ -56,12 +54,12 @@ func (s *APIServer) configureRouter() {
 	s.router.HandleFunc("/", s.handleHello())
 }
 func (s *APIServer) Configursore() error {
-	st := store.New(s.config.Store)
-	if err := st.Open(); err != nil {
-		return err
-	}
+	// st := store.New(s.config)
+	// if err := st.Open(); err != nil {
+		// return err
+	// }
 
-	s.store = st
+	// s.store = st
 	return nil
 }
 
