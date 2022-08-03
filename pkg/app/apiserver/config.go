@@ -8,7 +8,7 @@ import (
 )
 
 type Config struct {
-	BindAddr string `env:"BindAddr" env-default:"3000"`
+	BindAddr string `env:"BindAddr" env-default:":3000"`
 	LogLevel string `env:"logLevel" env-default:"debug"`
 }
 
