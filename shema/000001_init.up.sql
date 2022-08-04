@@ -1,4 +1,3 @@
-ALTER USER postgres WITH PASSWORD 'postal';
 CREATE TABLE
   users (
     id serial not nul unique,
