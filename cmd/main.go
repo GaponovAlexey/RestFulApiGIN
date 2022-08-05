@@ -8,7 +8,7 @@ import (
 	"github.com/gaponovalexey/todo-app/pkg/handler"
 	"github.com/gaponovalexey/todo-app/pkg/repository"
 	"github.com/gaponovalexey/todo-app/pkg/service"
-	// _ "github.com/lib/pq"
+	_ "github.com/lib/pq"
 	"github.com/spf13/viper"
 )
 

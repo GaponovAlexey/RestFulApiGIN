@@ -1,5 +1,5 @@
 DROP TABLE
-  users;
+  lists_item;
 
 DROP TABLE
   users_lists;
@@ -8,7 +8,7 @@ DROP TABLE
   todo_lists;
 
 DROP TABLE
-  lists_item;
+  users;
 
 DROP TABLE
   todo_items;
