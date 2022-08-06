@@ -3,11 +3,13 @@ package main
 import (
 	// "database/sql"
 	"log"
+	"os"
 
 	"github.com/gaponovalexey/todo-app"
 	"github.com/gaponovalexey/todo-app/pkg/handler"
 	"github.com/gaponovalexey/todo-app/pkg/repository"
 	"github.com/gaponovalexey/todo-app/pkg/service"
+	"github.com/joho/godotenv"
 	_ "github.com/lib/pq"
 	"github.com/spf13/viper"
 )
@@ -16,12 +18,18 @@ func main() {
 	if err := initConfig(); err != nil {
 		log.Fatalf("Error initial config: %s", err.Error())
 	}
+	//env
+	err := godotenv.Load()
+	if err != nil {
+		log.Fatal("Error loading .env file")
+	}
+
 	//db
 	db, err := repository.NewPostgresDB(repository.Config{
 		Host:     viper.GetString("db.host"),
 		Port:     viper.GetString("db.port"),
 		Username: viper.GetString("db.username"),
-		Password: viper.GetString("db.password"),
+		Password: os.Getenv("DB_PASSWORD"),
 		DBname:   viper.GetString("db.dbname"),
 		SSLMode:  viper.GetString("db.sslMode"),
 	})
