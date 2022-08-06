@@ -2,7 +2,6 @@ package main
 
 import (
 	// "database/sql"
-	"log"
 	"os"
 
 	"github.com/gaponovalexey/todo-app"
@@ -11,17 +10,19 @@ import (
 	"github.com/gaponovalexey/todo-app/pkg/service"
 	"github.com/joho/godotenv"
 	_ "github.com/lib/pq"
+	"github.com/sirupsen/logrus"
 	"github.com/spf13/viper"
 )
 
 func main() {
+	logrus.SetFormatter(new(logrus.JSONFormatter))
 	if err := initConfig(); err != nil {
-		log.Fatalf("Error initial config: %s", err.Error())
+		logrus.Fatalf("Error initial config: %s", err.Error())
 	}
 	//env
 	err := godotenv.Load()
 	if err != nil {
-		log.Fatal("Error loading .env file")
+		logrus.Fatal("Error loading .env file")
 	}
 
 	//db
@@ -34,7 +35,7 @@ func main() {
 		SSLMode:  viper.GetString("db.sslMode"),
 	})
 	if err != nil {
-		log.Fatal("failed to init", err)
+		logrus.Fatal("failed to init", err)
 	}
 
 	//repository
@@ -49,7 +50,7 @@ func main() {
 	//start
 	srv := new(todo.Server)
 	if err := srv.Run(viper.GetString("port"), handler.InitRoutes()); err != nil {
-		log.Fatalf("Error Server %s", err.Error())
+		logrus.Fatalf("Error Server %s", err.Error())
 	}
 }
 

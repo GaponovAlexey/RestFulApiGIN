@@ -3,6 +3,7 @@ package service
 import repository "github.com/gaponovalexey/todo-app/pkg/repository"
 
 type Authorization interface {
+	
 }
 
 type TodoList interface {
