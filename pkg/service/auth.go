@@ -25,9 +25,8 @@ func (s *AuthService) CreateUser(user todo.User) (int, error) {
 
 const salt = "d1dadae255gg211"
 
-func  generatePasswordHash(password string) string {
+func generatePasswordHash(password string) string {
 	hash := sha1.New()
 	hash.Write([]byte(password))
 	return fmt.Sprintf("%x", hash.Sum([]byte(salt)))
-
 }
