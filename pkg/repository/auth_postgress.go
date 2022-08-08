@@ -29,7 +29,6 @@ func (r *AuthPostgres) CreateUser(user todo.User) (int, error) {
 	return id, nil
 }
 
-
 //Get
 func (r *AuthPostgres) GetUser(username, password string) (todo.User, error) {
 	var user todo.User
