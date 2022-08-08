@@ -1,7 +1,6 @@
 package main
 
 import (
-	// "database/sql"
 	"os"
 
 	"github.com/gaponovalexey/todo-app"

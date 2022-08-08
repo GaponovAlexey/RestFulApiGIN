@@ -31,11 +31,13 @@ func newAuthService(repo repository.Authorization) *AuthService {
 	}
 }
 
+//create
 func (s *AuthService) CreateUser(user todo.User) (int, error) {
 	user.Password = generatePasswordHash(user.Password)
 	return s.repo.CreateUser(user)
 }
 
+//token
 func (s *AuthService) GenerateToken(username, password string) (string, error) {
 	//get
 	user, err := s.repo.GetUser(username, generatePasswordHash(password))
