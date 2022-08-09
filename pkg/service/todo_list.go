@@ -20,3 +20,5 @@ func (s *TodoListsService) Create(userId int, list todo.TodoList) (int, error) {
 func (s *TodoListsService) GetAll(userId int) ([]todo.TodoList, error) {
 	return s.repo.GetAll(userId)
 }
+
+func (s *TodoListsService)

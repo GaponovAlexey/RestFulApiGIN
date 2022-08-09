@@ -2,6 +2,7 @@ package handler
 
 import (
 	"net/http"
+	"strconv"
 
 	"github.com/gaponovalexey/todo-app"
 	"github.com/gin-gonic/gin"
@@ -52,6 +53,23 @@ func (h *Handler) getAllList(c *gin.Context) {
 }
 func (h *Handler) getListById(c *gin.Context) {
 
+	userID, err := getUserId(c)
+	if err != nil {
+		return
+	}
+	id, err := strconv.Atoi(c.Param("id"))
+	if err != nil {
+		NewErrorResponse(c, http.StatusBadRequest, "invalid id parameter")
+		return
+	}
+	list, err := h.services.TodoList.GetById(userID, id)
+	if err != nil {
+		NewErrorResponse(c, http.StatusInternalServerError, err.Error())
+		return
+	}
+	c.JSON(http.StatusOK, getAllListsResponse{
+		Data: lists,
+	})
 }
 func (h *Handler) updateList(c *gin.Context) {
 
