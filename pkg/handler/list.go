@@ -67,9 +67,7 @@ func (h *Handler) getListById(c *gin.Context) {
 		NewErrorResponse(c, http.StatusInternalServerError, err.Error())
 		return
 	}
-	c.JSON(http.StatusOK, getAllListsResponse{
-		Data: lists,
-	})
+	c.JSON(http.StatusOK, list)
 }
 func (h *Handler) updateList(c *gin.Context) {
 
