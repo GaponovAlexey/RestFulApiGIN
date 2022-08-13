@@ -30,6 +30,7 @@ func (h *Handler) createList(c *gin.Context) {
 		"id": id,
 	})
 
+
 }
 
 type getAllListsResponse struct {
