@@ -8,6 +8,8 @@ require (
 	github.com/jmoiron/sqlx v1.3.5
 	github.com/joho/godotenv v1.4.0
 	github.com/lib/pq v1.10.6
+	github.com/rs/cors v1.8.2
+	github.com/rs/cors/wrapper/gin v0.0.0-20220619195839-da52b0701de5
 	github.com/sirupsen/logrus v1.9.0
 	github.com/spf13/viper v1.12.0
 )

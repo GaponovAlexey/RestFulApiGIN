@@ -3,6 +3,7 @@ package handler
 import (
 	"github.com/gaponovalexey/todo-app/pkg/service"
 	"github.com/gin-gonic/gin"
+	cors "github.com/rs/cors/wrapper/gin"
 )
 
 type Handler struct {
@@ -16,6 +17,8 @@ func NewHandler(services *service.Service) *Handler {
 func (h *Handler) InitRoutes() *gin.Engine {
 	router := gin.New()
 
+	router.Use(cors.Default()) //cors
+	
 	auth := router.Group("/auth")
 	{
 		auth.POST("/sign-up", h.signUp)
