@@ -16,7 +16,7 @@ import (
 func main() {
 	//config LogrusJson
 	logrus.SetFormatter(new(logrus.JSONFormatter))
-	
+
 	//viper init
 	if err := initConfig(); err != nil {
 		logrus.Fatalf("Error initial config: %s", err.Error())
