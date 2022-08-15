@@ -15,21 +15,19 @@ func NewHandler(services *service.Service) *Handler {
 }
 
 func (h *Handler) InitRoutes() *gin.Engine {
-	router := gin.New()
+	router := gin.New()        // start gin
+	router.Use(cors.Default()) // safe cors
 
-	router.Use(cors.Default()) //cors
-	
 	auth := router.Group("/auth")
 	{
-		auth.POST("/sign-up", h.signUp)
-		auth.POST("/sign-in", h.signIn)
+		auth.POST("/sign-up", h.signUp) //return created user id
+		auth.POST("/sign-in", h.signIn) //return created user token_hash
 	}
-
-	api := router.Group("/api", h.userIdentity)
+	api := router.Group("/api", h.userIdentity) // token JWT
 	{
 		lists := api.Group("/lists")
 		{
-			lists.POST("/", h.createList)
+			lists.POST("/", h.createList) // add title and description at the todo_lists
 			lists.GET("/", h.getAllList)
 			lists.GET("/:id", h.getListById)
 			lists.PUT("/:id", h.updateList)

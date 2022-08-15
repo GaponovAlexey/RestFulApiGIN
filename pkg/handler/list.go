@@ -8,13 +8,17 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+type getAllListsResponse struct {
+	Data []todo.TodoList `json:"data"`
+}
+
 func (h *Handler) createList(c *gin.Context) {
+	var input todo.TodoList
+	
 	userID, err := getUserId(c)
 	if err != nil {
 		return
 	}
-
-	var input todo.TodoList
 
 	if err := c.BindJSON(&input); err != nil {
 		NewErrorResponse(c, http.StatusBadRequest, err.Error())
@@ -22,6 +26,7 @@ func (h *Handler) createList(c *gin.Context) {
 	}
 
 	id, err := h.services.TodoList.Create(userID, input)
+
 	if err != nil {
 		NewErrorResponse(c, http.StatusInternalServerError, err.Error())
 		return
@@ -30,13 +35,9 @@ func (h *Handler) createList(c *gin.Context) {
 		"id": id,
 	})
 
-
 }
 
-type getAllListsResponse struct {
-	Data []todo.TodoList `json:"data"`
-}
-
+// GetALL
 func (h *Handler) getAllList(c *gin.Context) {
 	userID, err := getUserId(c)
 	if err != nil {
