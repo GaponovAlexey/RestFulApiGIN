@@ -65,3 +65,14 @@ func (r *TodoListPostgres) Delete(userId, listId int) error {
 
 	return err
 }
+
+func (r *TodoListPostgres) Update(userId, listId int, input todo.UpdateListInput) error {
+	setValue := make([]string, 0)
+	args := make([]interface{}, 0)
+	argId := 1
+	if input.Title != nil {
+		setValue = append(setValue, fmt.Sprintf("title=$%d", argId))
+	}
+
+	return err
+}

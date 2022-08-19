@@ -26,7 +26,6 @@ func (h *Handler) InitRoutes() *gin.Engine {
     ExposedHeaders:   []string{"Link"},
     AllowCredentials: false,
     MaxAge:           300, // Maximum value not ignored by any of major browsers
-
 		// Enable Debugging for testing, consider disabling in production
 		// Debug: true,
 	})) // safe cors
