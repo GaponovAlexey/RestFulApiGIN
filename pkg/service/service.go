@@ -11,18 +11,15 @@ type Authorization interface {
 	ParseToken(token string) (int, error)
 }
 
-
 type TodoList interface {
 	Create(userId int, list todo.TodoList) (int, error)
 	GetAll(userId int) ([]todo.TodoList, error)
 	GetById(userId, listId int) (todo.TodoList, error)
+	Delete(userId, listId int) error
 }
-
 
 type TodoItem interface {
-
 }
-
 
 type Service struct {
 	Authorization

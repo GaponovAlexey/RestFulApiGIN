@@ -12,9 +12,10 @@ type getAllListsResponse struct {
 	Data []todo.TodoList `json:"data"`
 }
 
+//createList
 func (h *Handler) createList(c *gin.Context) {
 	var input todo.TodoList
-	
+
 	userID, err := getUserId(c)
 	if err != nil {
 		return
@@ -72,7 +73,23 @@ func (h *Handler) getListById(c *gin.Context) {
 	c.JSON(http.StatusOK, list)
 }
 func (h *Handler) updateList(c *gin.Context) {
-
+	userID, err := getUserId(c)
+	if err != nil {
+		return
+	}
+	id, err := strconv.Atoi(c.Param("id"))
+	if err != nil {
+		NewErrorResponse(c, http.StatusBadRequest, "invalid id parameter")
+		return
+	}
+	err = h.services.TodoList.Delete(userID, id)
+	if err != nil {
+		NewErrorResponse(c, http.StatusInternalServerError, err.Error())
+		return
+	}
+	c.JSON(http.StatusOK, statusResponse{
+		Status: "ok",
+	})
 }
 func (h *Handler) deleteList(c *gin.Context) {
 
