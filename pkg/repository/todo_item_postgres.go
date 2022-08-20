@@ -80,29 +80,32 @@ func (r *TodoItemPostgres) Update(userId, ItemId int, input todo.UpdateItemInput
 	setValues := make([]string, 0)
 	args := make([]interface{}, 0)
 	argId := 1
+
 	if input.Title != nil {
 		setValues = append(setValues, fmt.Sprintf("title=$%d", argId))
-		args = append(args, *&input.Title)
+		args = append(args, *input.Title)
 		argId++
 	}
+
 	if input.Description != nil {
 		setValues = append(setValues, fmt.Sprintf("description=$%d", argId))
-		args = append(args, *&input.Description)
+		args = append(args, *input.Description)
 		argId++
 	}
+
 	if input.Done != nil {
 		setValues = append(setValues, fmt.Sprintf("done=$%d", argId))
-		args = append(args, *&input.Done)
+		args = append(args, *input.Done)
 		argId++
 	}
 
 	setQuery := strings.Join(setValues, ", ")
 
-	query := fmt.Sprintf("UPDATE %s ti SET %s FROM %s li,%s ul WHERE ti.id = li.item_id AND li.list_id = ul.list_id AND ul.user_id = $%d AND ti.id = $%d", todoItemsTable, setQuery, listsItemsTable, usersListsTable, args, argId+1)
-
+	query := fmt.Sprintf(`UPDATE %s ti SET %s FROM %s li, %s ul
+									WHERE ti.id = li.item_id AND li.list_id = ul.list_id AND ul.user_id = $%d AND ti.id = $%d`,
+		todoItemsTable, setQuery, listsItemsTable, usersListsTable, argId, argId+1)
 	args = append(args, userId, ItemId)
-
-	//logrus
+	
 	logrus.Debugf("updateQuery: %s", query)
 	logrus.Debugf("args: %s", args)
 
