@@ -1,11 +1,36 @@
 package handler
 
 import (
+	"net/http"
+	"strconv"
+
+	"github.com/gaponovalexey/todo-app"
 	"github.com/gin-gonic/gin"
 )
 
 func (h *Handler) createItem(c *gin.Context) {
- 
+	userId, err := getUserId(c)
+	if err != nil {
+		return
+	}
+	listId, err := strconv.Atoi(c.Param("id"))
+	if err != nil {
+		NewErrorResponse(c, http.StatusBadRequest, "invalid id parameter")
+		return
+	}
+	var input todo.TodoItem
+	if err := c.BindJSON(&input); err != nil {
+		NewErrorResponse(c, http.StatusBadRequest, "invalid id parameter")
+		return
+	}
+	id, err := h.services.TodoItem.Create(userId, listId, input)
+	if err != nil {
+		NewErrorResponse(c, http.StatusInternalServerError, "invalid id parameter")
+		return
+	}
+	c.JSON(http.StatusOK, map[string]interface{}{
+		"id": id,
+	})
 }
 func (h *Handler) getAllItems(c *gin.Context) {
 
