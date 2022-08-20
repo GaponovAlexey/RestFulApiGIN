@@ -87,6 +87,7 @@ func (h *Handler) updateList(c *gin.Context) {
 		NewErrorResponse(c, http.StatusBadRequest, err.Error())
 		return
 	}
+	
 	err = h.services.Update(userID, id, input)
 }
 
