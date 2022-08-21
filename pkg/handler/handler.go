@@ -37,23 +37,23 @@ func (h *Handler) InitRoutes() *gin.Engine {
 	{
 		lists := api.Group("/lists")
 		{
-			lists.POST("/", h.createList) // add title and description at the todo_lists
-			lists.GET("/", h.getAllList)
-			lists.GET("/:id", h.getListById)
-			lists.PUT("/:id", h.updateList)
-			lists.DELETE("/:id", h.deleteList)
+			lists.POST("/", h.createList)      // add title and description at the todo_lists
+			lists.GET("/", h.getAllList)       // get all lists
+			lists.GET("/:id", h.getListById)   // getById list
+			lists.PUT("/:id", h.updateList)    //update lists
+			lists.DELETE("/:id", h.deleteList) // delete lists
 
 			items := lists.Group(":id/items")
 			{
-				items.POST("/", h.createItem)
-				items.GET("/", h.getAllItems)
+				items.POST("/", h.createItem) // add items
+				items.GET("/", h.getAllItems) // get all items
 			}
 		}
 		items := api.Group("/items")
 		{
-			items.GET("/:id", h.getItemById)
-			items.PUT("/:id", h.updateItem)
-			items.DELETE("/:id", h.deleteItem)
+			items.GET("/:id", h.getItemById)   // getById items
+			items.PUT("/:id", h.updateItem)    // update items
+			items.DELETE("/:id", h.deleteItem) // delete items
 
 		}
 	}
