@@ -5,7 +5,7 @@ Implementation CRUD
 2. gin-gonic/gin
 3. Clean Architecture
 4. Postgres db
-5. libraries spf13/viper, sqlx, joho/godotenv, sirupsen/logrus, 
+5. libraries spf13/viper, sqlx, joho/godotenv, sirupsen/logrus, rs/cors
 6. Registration and authentication JWT Middleware
 7. Graceful Shutdown
 
