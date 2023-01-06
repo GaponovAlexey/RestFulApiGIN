@@ -7,6 +7,7 @@ import (
 	"github.com/gaponovalexey/todo-app"
 	"github.com/jmoiron/sqlx"
 	"github.com/sirupsen/logrus"
+
 )
 
 type TodoItemPostgres struct {
@@ -45,8 +46,17 @@ func (r *TodoItemPostgres) Create(listId int, item todo.TodoItem) (int, error) {
 
 func (r *TodoItemPostgres) GetAll(userId, listId int) ([]todo.TodoItem, error) {
 	var items []todo.TodoItem
-	query := fmt.Sprintf(`SELECT ti.id, ti.title, ti.description, ti.done FROM %s ti INNER JOIN %s li on li.item_id = ti.id
-									INNER JOIN %s ul on ul.list_id = li.list_id WHERE li.list_id = $1 AND ul.user_id = $2`,
+	query := fmt.Sprintf(
+		
+		`SELECT ti.id, ti.title, ti.description,
+		 
+		ti.done FROM %s ti INNER JOIN %s 
+		 
+		 li on li.item_id = ti.id
+			
+		 INNER JOIN %s ul on ul.list_id = 
+			
+		 li.list_id WHERE li.list_id = $1 AND ul.user_id = $2`,
 		todoItemsTable, listsItemsTable, usersListsTable)
 	if err := r.db.Select(&items, query, listId, userId); err != nil {
 		return nil, err
@@ -105,7 +115,7 @@ func (r *TodoItemPostgres) Update(userId, ItemId int, input todo.UpdateItemInput
 									WHERE ti.id = li.item_id AND li.list_id = ul.list_id AND ul.user_id = $%d AND ti.id = $%d`,
 		todoItemsTable, setQuery, listsItemsTable, usersListsTable, argId, argId+1)
 	args = append(args, userId, ItemId)
-	
+
 	logrus.Debugf("updateQuery: %s", query)
 	logrus.Debugf("args: %s", args)
 
